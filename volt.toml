@@ -4,7 +4,7 @@ name         = "lapce-gleam"
 author      = "krig"
 description = "Gleam support via gleam"
 repository  = "https://github.com/krig/lapce-gleam.git"
-version     = "0.0.1+gleam.0.13.0"
+version     = "0.0.2+gleam.0.13.0"
 
 icon = "logo.svg"
 wasm = "lapce-gleam.wasm"
@@ -14,8 +14,10 @@ language = [
   "gleam",
 ]
 workspace-contains = [
-  "**/*.gleam",
-  "/gleam.toml",
+  "*/**.gleam",
+  "*/*/**.gleam",
+  "*/*/*/**.gleam",
+  "*/gleam.toml",
 ]
 
 [config."lsp.serverPath"]

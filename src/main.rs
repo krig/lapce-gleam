@@ -26,7 +26,7 @@ fn initialize(params: InitializeParams) -> Result<()> {
     PLUGIN_RPC.stderr("lapce-gleam");
     let document_selector: DocumentSelector = vec![DocumentFilter {
         language: Some(string!("gleam")),
-        pattern:  Some(string!("**/*.gleam")),
+        pattern:  Some(string!("**.gleam")),
         scheme:   None,
     }];
     let mut server_args = vec![string!("lsp")];
