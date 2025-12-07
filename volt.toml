@@ -4,7 +4,7 @@ name         = "lapce-gleam"
 author      = "krig"
 description = "Gleam support via gleam"
 repository  = "https://github.com/krig/lapce-gleam.git"
-version     = "0.0.3+gleam.0.13.0"
+version     = "0.0.4+gleam.0.13.0"
 
 icon = "logo.svg"
 wasm = "lapce-gleam.wasm"
