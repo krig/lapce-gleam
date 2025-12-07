@@ -5,19 +5,18 @@ resolver = "2"
 version  = "0.0.0"
 
 [target.'cfg(target_os = "wasi")'.dependencies]
-zip = { version = "0.6", default-features = false, features = [ "deflate" ] }
+semver = "1.0"
 
 # default deps for all lapce plugins
-anyhow       = { version = "1.0" }
+anyhow = "1.0"
+thiserror = "1.0"
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
 lapce-plugin = { git = "https://github.com/lapce/lapce-plugin-rust.git" }
-serde        = { version = "1.0", features = [ "derive" ] }
-serde_json   = { version = "1.0" }
 
-[profile.plugin-release]
-inherits = "release"
-
+[profile.release]
+opt-level = 3
+lto = true
 codegen-units = 1
-lto           = true
-opt-level     = 3
-panic         = "abort"
-strip         = true
+strip = true
+panic = "abort"

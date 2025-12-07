@@ -26,8 +26,8 @@ fn initialize(params: InitializeParams) -> Result<()> {
     PLUGIN_RPC.stderr("lapce-gleam");
     let document_selector: DocumentSelector = vec![DocumentFilter {
         language: Some(string!("gleam")),
-        pattern:  Some(string!("**.gleam")),
-        scheme:   None,
+        pattern: Some(string!("**.gleam")),
+        scheme: None,
     }];
     let mut server_args = vec![string!("lsp")];
     let mut initialization_options = None;
@@ -38,7 +38,7 @@ fn initialize(params: InitializeParams) -> Result<()> {
         }
 
         if let Some(lsp) = options.get("lsp") {
-            if let Some(args) = volt.get("serverArgs") {
+            if let Some(args) = lsp.get("serverArgs") {
                 if let Some(args) = args.as_array() {
                     if !args.is_empty() {
                         server_args = vec![];
@@ -54,13 +54,14 @@ fn initialize(params: InitializeParams) -> Result<()> {
             if let Some(server_path) = lsp.get("serverPath") {
                 if let Some(server_path) = server_path.as_str() {
                     if !server_path.is_empty() {
-                        let server_uri = Url::parse(&format!("urn:{}", server_path))?;
+                        let volt_uri = VoltEnvironment::uri()?;
+                        let server_path = Url::parse(&volt_uri).unwrap().join(server_path)?;
                         PLUGIN_RPC.start_lsp(
-                            server_uri,
+                            server_path,
                             server_args,
                             document_selector,
                             initialization_options,
-                        )?;
+                        );
                     }
                 }
             }
@@ -83,4 +84,11 @@ impl LapcePlugin for State {
             _ => {}
         }
     }
+}
+
+#[macro_export]
+macro_rules! string {
+    ( $x:expr ) => {
+        String::from($x)
+    };
 }
