@@ -1,0 +1,23 @@
+[package]
+edition  = "2021"
+name     = "lapce-gleam"
+resolver = "2"
+version  = "0.0.0"
+
+[target.'cfg(target_os = "wasi")'.dependencies]
+zip = { version = "0.6", default-features = false, features = [ "deflate" ] }
+
+# default deps for all lapce plugins
+anyhow       = { version = "1.0" }
+lapce-plugin = { git = "https://github.com/lapce/lapce-plugin-rust.git" }
+serde        = { version = "1.0", features = [ "derive" ] }
+serde_json   = { version = "1.0" }
+
+[profile.plugin-release]
+inherits = "release"
+
+codegen-units = 1
+lto           = true
+opt-level     = 3
+panic         = "abort"
+strip         = true

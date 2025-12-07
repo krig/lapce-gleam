@@ -1,0 +1,31 @@
+display-name = "Gleam"
+name         = "lapce-gleam"
+
+author      = "krig"
+description = "Gleam support via gleam"
+repository  = "https://github.com/krig/lapce-gleam.git"
+version     = "0.0.1+gleam.0.13.0"
+
+icon = "logo.svg"
+wasm = "lapce-gleam.wasm"
+
+[activation]
+language = [
+  "gleam",
+]
+workspace-contains = [
+  "**/*.gleam",
+  "/gleam.toml",
+]
+
+[config."lsp.serverPath"]
+default     = ""
+description = "Path to Gleam executable"
+
+[config."lsp.serverArgs"]
+default     = [ "lsp" ]
+description = "Arguments to pass to Gleam LSP"
+
+[config."gleam.enable"]
+default     = true
+description = "Whether to enable Gleam LSP"
